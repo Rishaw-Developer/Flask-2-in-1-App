@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container mt-3">
+<form action="/todo" method="POST">
+  <h2 class="text-light">Add your Todo</h2>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label text-light">Todo Title</label>
+      <input type="text" name="title" class="form-control" aria-describedby="emailHelp">
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label text-light">Todo Description</label>
+      <input type="text" name="desc" class="form-control" >
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Submit</button>
+</form>
+
+<table class="table table-dark table-striped mt-5">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for alltodos in allTodo %}
+      
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{alltodos.title}}</td>
+      <td>{{alltodos.des}}</td>
+      <td>{{alltodos.date}}</td>
+      <td>
+        <a href="/todo/update/{{alltodos.sno}}" class="btn btn-outline-info btn-sm mx-2" type="button">Update</button>
+        <a href="/todo/delete/{{alltodos.sno}}" class="btn btn-outline-danger btn-sm mx-2" type="button">Delete</button>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock body %}
